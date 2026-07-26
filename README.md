@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-2dc4b5.svg)](LICENSE)
 [![Electron](https://img.shields.io/badge/Electron-31-47848F?logo=electron&logoColor=white)](https://electronjs.org)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev)
-[![Sharp](https://img.shields.io/badge/Sharp-0.33-99CC00)](https://sharp.pixelplumbing.com)
+[![Sharp](https://img.shields.io/badge/Sharp-0.35-99CC00)](https://sharp.pixelplumbing.com)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)](#download)
 
 ![Wehost Image Tool processing a batch](docs/screenshots/demo.gif)
