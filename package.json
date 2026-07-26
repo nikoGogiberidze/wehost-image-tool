@@ -37,7 +37,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,jsx,json,css,md,yml}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,json,css,md,yml}\"",
-    "test": "node --test \"tests/unit/**/*.test.mjs\"",
+    "test": "node --test",
     "test:e2e": "playwright test",
     "fixtures": "node scripts/make-fixtures.mjs",
     "icon": "node scripts/make-icon.mjs",
