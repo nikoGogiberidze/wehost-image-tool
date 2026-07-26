@@ -1,0 +1,98 @@
+{
+  "name": "wehost-image-tool",
+  "version": "1.0.0",
+  "description": "Offline Windows desktop app for bulk image watermarking and compression, built with Electron, React and Sharp",
+  "main": "electron/main.js",
+  "author": "Niko Gogiberidze",
+  "license": "MIT",
+  "private": true,
+  "keywords": [
+    "electron",
+    "react",
+    "sharp",
+    "image-processing",
+    "watermark",
+    "image-compression",
+    "desktop-app",
+    "batch-processing",
+    "offline"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikoGogiberidze/wehost-image-tool.git"
+  },
+  "homepage": "https://github.com/nikoGogiberidze/wehost-image-tool#readme",
+  "bugs": {
+    "url": "https://github.com/nikoGogiberidze/wehost-image-tool/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "vite build",
+    "dist": "vite build && electron-builder",
+    "preview": "vite preview --port 5173",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,css,md,yml}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,json,css,md,yml}\"",
+    "test": "node --test \"tests/unit/**/*.test.mjs\"",
+    "test:e2e": "playwright test",
+    "fixtures": "node scripts/make-fixtures.mjs",
+    "icon": "node scripts/make-icon.mjs",
+    "screenshots": "node scripts/capture-media.mjs"
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.33.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.61.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "gif-encoder-2": "^1.0.5",
+    "globals": "^15.11.0",
+    "postcss": "^8.4.40",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.7",
+    "vite": "^5.3.5",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "ge.wehost.imagetool",
+    "productName": "Wehost Image Tool",
+    "copyright": "Copyright © 2026 Niko Gogiberidze",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "${productName} Setup ${version}.${ext}"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "shared/**/*",
+      "node_modules/**/*"
+    ],
+    "asar": true
+  }
+}

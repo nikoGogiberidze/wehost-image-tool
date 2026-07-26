@@ -1,0 +1,11 @@
+# Normalise line endings so a Windows-authored repo stays clean on Linux CI
+* text=auto eol=lf
+
+# Never touch binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.exe binary

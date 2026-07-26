@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build and release (e.g. v1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish Windows installer
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Gate the release on the same checks CI runs — a tag should never ship
+      # something that would have failed a pull request.
+      - name: Unit tests
+        run: npm test
+
+      - name: Build renderer
+        run: npm run build
+
+      - name: End-to-end tests
+        run: npm run test:e2e
+
+      - name: Package installer
+        run: npx electron-builder --win --publish never
+        env:
+          # No signing certificate; skip the auto-discovery step that would
+          # otherwise slow the build down looking for one.
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      # The packaged app resolves shared/geometry.mjs from inside the asar
+      # archive, which the unpackaged runs never exercise. Never ship a build
+      # without confirming the real binary processes images.
+      - name: Smoke-test the packaged binary
+        run: npx playwright test packaged
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          name: ${{ github.event.inputs.tag || github.ref_name }}
+          body: |
+            See [CHANGELOG.md](https://github.com/nikoGogiberidze/wehost-image-tool/blob/main/CHANGELOG.md) for what changed.
+
+            **Installing:** download the `.exe` below and run it. The installer is
+            not code-signed, so Windows will show a "Windows protected your PC"
+            dialog — click **More info → Run anyway**. This build was produced from
+            tagged source by this workflow, and you can always
+            [build it yourself](https://github.com/nikoGogiberidze/wehost-image-tool#build-from-source).
+          files: |
+            release/*.exe
+            release/*.blockmap
+          draft: false
+          prerelease: false

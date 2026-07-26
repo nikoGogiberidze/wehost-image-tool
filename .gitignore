@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+release/
+
+# Test artifacts
+tests/**/__fixtures__/
+tests/**/output/
+test-results/
+playwright-report/
+
+# Demo capture intermediates (the final .png/.gif files ARE committed)
+docs/screenshots/.frames/
+
+# Local agent/editor tooling
+.claude/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

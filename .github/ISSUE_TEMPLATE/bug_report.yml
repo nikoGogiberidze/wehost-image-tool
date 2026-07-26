@@ -1,0 +1,60 @@
+name: Bug report
+description: Something isn't working the way it should
+labels: ['bug']
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what did you get instead?
+      placeholder: |
+        I selected "Both", loaded 20 photos and pressed Process & Save.
+        I expected watermarked JPEGs; three of them came out untouched.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Shown on the release you installed, e.g. 1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 Pro 24H2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Which mode were you using?
+      options:
+        - Watermark
+        - Compress
+        - Both
+        - Not applicable
+    validations:
+      required: true
+
+  - type: textarea
+    id: images
+    attributes:
+      label: Source images
+      description: >
+        Image properties matter a lot for these bugs. Roughly how many images,
+        what format, and what dimensions? If one specific file triggers it and
+        you can share it, that is the single most useful thing you can attach.
+      placeholder: 33 JPEGs, around 4000x3000, ~20 MB each
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Error messages, screenshots, or anything else that seems relevant.

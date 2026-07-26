@@ -1,0 +1,30 @@
+name: Feature request
+description: Suggest something the tool should do
+labels: ['enhancement']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: >
+        Describe the task, not the solution. Knowing the underlying workflow
+        usually turns up a simpler answer than the feature first imagined.
+      placeholder: >
+        I watermark for two different clients and have to re-enter all the
+        settings each time I switch.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like it to do?
+      placeholder: Save named presets and pick one from a dropdown.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Anything you've tried instead?
+      description: Workarounds, other tools, or approaches you've already ruled out.
