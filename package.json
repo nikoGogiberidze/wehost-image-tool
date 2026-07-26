@@ -44,7 +44,7 @@
     "screenshots": "node scripts/capture-media.mjs"
   },
   "dependencies": {
-    "electron-store": "^8.2.0",
+    "electron-store": "^11.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sharp": "^0.33.4"
