@@ -13,24 +13,14 @@ updates:
         patterns: ['*']
         update-types: ['minor', 'patch']
 
-    # Major bumps of these are migrations, not updates. They need a human to run
-    # the E2E suite and the packaged-binary smoke test against them, so they are
-    # excluded here rather than arriving as PRs that will always fail CI.
+    # Major bumps are migrations, not updates. Electron, Sharp and
+    # electron-builder changes need the E2E suite and the packaged-binary smoke
+    # test run against them; electron-store v9+ is ESM-only and the main process
+    # is CommonJS; Tailwind v4 replaces the JS config entirely; React 19 changes
+    # rendering semantics. All of those want a human driving, so majors are
+    # excluded here rather than arriving as PRs that sit and fail.
     ignore:
-      - dependency-name: electron
-        update-types: ['version-update:semver-major']
-      - dependency-name: electron-builder
-        update-types: ['version-update:semver-major']
-      - dependency-name: sharp
-        update-types: ['version-update:semver-major']
-      # electron-store v9+ is ESM-only; the main process is CommonJS and would
-      # need the same dynamic-import treatment as shared/geometry.mjs.
-      - dependency-name: electron-store
-        update-types: ['version-update:semver-major']
-      # Tailwind v4 replaces the JS config with CSS-first configuration.
-      - dependency-name: tailwindcss
-        update-types: ['version-update:semver-major']
-      - dependency-name: eslint-plugin-react-hooks
+      - dependency-name: '*'
         update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
